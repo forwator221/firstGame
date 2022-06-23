@@ -5,10 +5,17 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     PlayerControls playerControls;
+    AnimatorManager animatorManager;
 
     public Vector2 movementInput;
+    public float moveAmount;
     public float vertInput;
     public float horInput;
+
+    private void Awake()
+    {
+        animatorManager = GetComponent<AnimatorManager>();
+    }
 
     private void OnEnable()
     {
@@ -39,5 +46,7 @@ public class InputManager : MonoBehaviour
     {
         vertInput = movementInput.y;
         horInput = movementInput.x;
+        moveAmount = Mathf.Clamp01(Mathf.Abs(horInput) + Mathf.Abs(vertInput));
+        animatorManager.UpdateAnimatorValues(0, moveAmount);
     }
 }
