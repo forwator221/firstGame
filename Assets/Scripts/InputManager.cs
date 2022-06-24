@@ -8,6 +8,11 @@ public class InputManager : MonoBehaviour
     AnimatorManager animatorManager;
 
     public Vector2 movementInput;
+    public Vector2 cameraInput;
+
+    public float cameraInputX;
+    public float cameraInputY;
+
     public float moveAmount;
     public float vertInput;
     public float horInput;
@@ -24,6 +29,7 @@ public class InputManager : MonoBehaviour
             playerControls = new PlayerControls();
 
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
+            playerControls.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
         }
 
         playerControls.Enable();
@@ -46,6 +52,10 @@ public class InputManager : MonoBehaviour
     {
         vertInput = movementInput.y;
         horInput = movementInput.x;
+
+        cameraInputX = cameraInput.x;
+        cameraInputY = cameraInput.y;
+
         moveAmount = Mathf.Clamp01(Mathf.Abs(horInput) + Mathf.Abs(vertInput));
         animatorManager.UpdateAnimatorValues(0, moveAmount);
     }
