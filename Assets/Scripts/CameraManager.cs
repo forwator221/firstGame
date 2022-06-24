@@ -16,7 +16,7 @@ public class CameraManager : MonoBehaviour
 
     public float cameraCollisionOffSet = 0.2f; // На сколько далеко будет отскакивать камера при столкновнеии с объектом
     public float minimumCollisionOffSet = 0.2f;
-    public float cameraCollisionRadius = 2; // Радиус столкновения камеры
+    public float cameraCollisionRadius = 0.2f; // Радиус столкновения камеры
     public float cameraFollowSpeed = 0.2f; // Скорость следования камеры
     public float cameraLookSpeed = 2; // Скорость поворота камеры по оси Х
     public float cameraPivotSpeed = 2; // Скорость поворота камеры по оси У
@@ -30,6 +30,7 @@ public class CameraManager : MonoBehaviour
     {
         inputManager = FindObjectOfType<InputManager>();
         targetTransform = FindObjectOfType<PlayerManager>().transform;
+        cameraTransform = Camera.main.transform;
         defaultPosition = cameraTransform.localPosition.z;
     }
 
@@ -80,7 +81,7 @@ public class CameraManager : MonoBehaviour
             (cameraPivot.transform.position, cameraCollisionRadius, direction, out hit, Mathf.Abs(targetPosition), collisionLayers))
         {
             float distance = Vector3.Distance(cameraPivot.position, hit.point);
-            targetPosition = - (distance - cameraCollisionOffSet);
+            targetPosition =- (distance - cameraCollisionOffSet);
         }
 
         if (Mathf.Abs(targetPosition) < minimumCollisionOffSet)
