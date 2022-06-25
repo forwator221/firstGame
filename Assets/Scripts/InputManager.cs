@@ -5,6 +5,7 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     PlayerControls playerControls;
+    PlayerLokomotion playerLokomotion;
     AnimatorManager animatorManager;
 
     public Vector2 movementInput;
@@ -17,9 +18,12 @@ public class InputManager : MonoBehaviour
     public float vertInput;
     public float horInput;
 
+    public bool sprintInput;
+
     private void Awake()
     {
         animatorManager = GetComponent<AnimatorManager>();
+        playerLokomotion = GetComponent<PlayerLokomotion>();
     }
 
     private void OnEnable()
@@ -30,6 +34,9 @@ public class InputManager : MonoBehaviour
 
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
             playerControls.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
+
+            playerControls.PlayerActions.Sprinting.performed += i => sprintInput = true;
+            playerControls.PlayerActions.Sprinting.canceled += i => sprintInput = false;
         }
 
         playerControls.Enable();
@@ -43,9 +50,9 @@ public class InputManager : MonoBehaviour
     public void HandleAllInputs()
     {
         HandleMovementInput();
+        HandleSprintingInput();
         //HandleActionInput
         //HandeJumpInput
-        //HandeRunInput
     }
 
     private void HandleMovementInput()
@@ -57,6 +64,18 @@ public class InputManager : MonoBehaviour
         cameraInputY = cameraInput.y;
 
         moveAmount = Mathf.Clamp01(Mathf.Abs(horInput) + Mathf.Abs(vertInput));
-        animatorManager.UpdateAnimatorValues(0, moveAmount);
+        animatorManager.UpdateAnimatorValues(0, moveAmount, playerLokomotion.isSprinting);
+    }
+
+    private void HandleSprintingInput()
+    {
+        if (sprintInput && moveAmount > 0.5f)
+        {
+            playerLokomotion.isSprinting = true;
+        }
+        else
+        {
+            playerLokomotion.isSprinting = false;
+        }
     }
 }

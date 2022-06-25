@@ -10,7 +10,12 @@ public class PlayerLokomotion : MonoBehaviour
     Transform cameraObject;
     Rigidbody playerRigitbody;
 
-    public float movementSpeed = 7;
+    public bool isSprinting;
+
+    [Header("Movement Speeds")]
+    public float walkingSpeed = 1.5f;
+    public float runningSpeed = 5;
+    public float sprintingSpeed = 7;
     public float rotationSpeed = 15;
 
     private void Awake()
@@ -31,8 +36,16 @@ public class PlayerLokomotion : MonoBehaviour
         moveDirection = moveDirection + cameraObject.right * inputManager.horInput;
         moveDirection.Normalize();
         moveDirection.y = 0;
-        moveDirection = moveDirection * movementSpeed;
 
+        if (isSprinting)
+        {
+            moveDirection = moveDirection * sprintingSpeed;
+        }
+        else
+        {
+            moveDirection = moveDirection * walkingSpeed;
+        }
+        
         Vector3 movementVelocity = moveDirection;
         playerRigitbody.velocity = movementVelocity;
     }
