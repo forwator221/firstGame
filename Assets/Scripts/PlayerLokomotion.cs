@@ -4,17 +4,36 @@ using UnityEngine;
 
 public class PlayerLokomotion : MonoBehaviour
 {
+    PlayerManager playerManager;
+    AnimatorManager animatorManager;
     InputManager inputManager;
 
     Vector3 moveDirection;
     Transform cameraObject;
     Rigidbody playerRigitbody;
 
-    public float movementSpeed = 7;
+    [Header("Falling")]
+    public float inAirtimer;
+    public float leapingVelocity;
+    public float fallingVelocity;
+    public float rayCastHightOffSet = 0.5f;
+    public LayerMask groundLayer;
+
+    [Header("Movement Flags")]
+    public bool isSprinting;
+    public bool isGrounded;
+    //public bool isJumping;
+
+    [Header("Movement Speeds")]
+    public float walkingSpeed = 1.5f;
+    public float runningSpeed = 5;
+    public float sprintingSpeed = 7;
     public float rotationSpeed = 15;
 
     private void Awake()
     {
+        playerManager = GetComponent<PlayerManager>();
+        animatorManager = GetComponent<AnimatorManager>();
         inputManager = GetComponent<InputManager>();
         playerRigitbody = GetComponent<Rigidbody>();
         cameraObject = Camera.main.transform;
@@ -22,8 +41,12 @@ public class PlayerLokomotion : MonoBehaviour
 
     public void HandleAllMovement()
     {
+        if (playerManager.isInteracting)
+            return;
+
         HandleMovement();
         HandleRotation();
+        HandleFallingAndlanding();
     }
     private void HandleMovement()
     {
@@ -31,7 +54,22 @@ public class PlayerLokomotion : MonoBehaviour
         moveDirection = moveDirection + cameraObject.right * inputManager.horInput;
         moveDirection.Normalize();
         moveDirection.y = 0;
-        moveDirection = moveDirection * movementSpeed;
+
+        if (isSprinting)
+        {
+            moveDirection = moveDirection * sprintingSpeed;
+        }
+        else
+        {
+            if (inputManager.moveAmount >= 0.5f)
+            {
+                moveDirection = moveDirection * runningSpeed;
+            }
+            else
+            {
+                moveDirection = moveDirection * walkingSpeed;
+            }
+        }
 
         Vector3 movementVelocity = moveDirection;
         playerRigitbody.velocity = movementVelocity;
@@ -55,4 +93,43 @@ public class PlayerLokomotion : MonoBehaviour
 
         transform.rotation = playerRotation;
     }
+
+    private void HandleFallingAndlanding()
+    {
+        RaycastHit hit;
+        Vector3 rayCastOrigin = transform.position;
+        rayCastOrigin.y = rayCastOrigin.y + rayCastHightOffSet;
+
+        if (!isGrounded)
+        {
+            if (!playerManager.isInteracting)
+            {
+                animatorManager.PlayTargetAnimation("Falling", true);
+            }
+
+            inAirtimer = inAirtimer + Time.deltaTime;
+            playerRigitbody.AddForce(transform.forward * leapingVelocity);
+            playerRigitbody.AddForce(-Vector3.up * fallingVelocity * inAirtimer);
+        }
+
+        if (Physics.SphereCast(rayCastOrigin, 0.2f, -Vector3.up, out hit, groundLayer))
+        {
+            if (!isGrounded && !playerManager.isInteracting)
+            {
+                animatorManager.PlayTargetAnimation("Land", true);
+            }
+
+            inAirtimer = 0;
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+        }
+    }
+
+    //private void HandleJumping()
+    //{
+
+    //}
 }

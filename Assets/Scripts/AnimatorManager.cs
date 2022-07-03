@@ -15,7 +15,13 @@ public class AnimatorManager : MonoBehaviour
         vertical = Animator.StringToHash("Vertical");
     }
 
-    public void UpdateAnimatorValues(float horMovement, float vertMovement)
+    public void PlayTargetAnimation(string targetAnimation, bool isInteracting)
+    {
+        animator.SetBool("isInteracting", isInteracting);
+        animator.CrossFade(targetAnimation, 0.2f);
+    }
+
+    public void UpdateAnimatorValues(float horMovement, float vertMovement, bool isSprinting)
     {
         //Animation snapping
         float snappedHorizontal;
@@ -65,6 +71,12 @@ public class AnimatorManager : MonoBehaviour
             snappedVertical = 0;
         }
         #endregion
+
+        if (isSprinting)
+        {
+            snappedHorizontal = horMovement;
+            snappedVertical = 2;
+        }
 
         animator.SetFloat(horizontal, snappedHorizontal, 0.1f, Time.deltaTime);
         animator.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);
