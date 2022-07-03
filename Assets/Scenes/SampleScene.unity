@@ -478,7 +478,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474376bcffadc2c4fab89034d09bbe93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 7
+  isSprinting: 0
+  walkingSpeed: 1.5
+  runningSpeed: 3
+  sprintingSpeed: 5
   rotationSpeed: 15
 --- !u!114 &1245163558
 MonoBehaviour:
@@ -561,7 +564,7 @@ MonoBehaviour:
     m_Bits: 65
   cameraCollisionOffSet: 0.2
   minimumCollisionOffSet: 0.2
-  cameraCollisionRadius: 1
+  cameraCollisionRadius: 0.2
   cameraFollowSpeed: 0.2
   cameraLookSpeed: 2
   cameraPivotSpeed: 2
