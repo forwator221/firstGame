@@ -17,6 +17,7 @@ public class PlayerLokomotion : MonoBehaviour
     public float leapingVelocity;
     public float fallingVelocity;
     public float rayCastHightOffSet = 0.5f;
+    public float maxDistance = 1;
     public LayerMask groundLayer;
 
     [Header("Movement Flags")]
@@ -112,7 +113,7 @@ public class PlayerLokomotion : MonoBehaviour
             playerRigitbody.AddForce(-Vector3.up * fallingVelocity * inAirtimer);
         }
 
-        if (Physics.SphereCast(rayCastOrigin, 0.2f, -Vector3.up, out hit, groundLayer))
+        if (Physics.SphereCast(rayCastOrigin, 0.2f, -Vector3.up, out hit,maxDistance, groundLayer))
         {
             if (!isGrounded && !playerManager.isInteracting)
             {

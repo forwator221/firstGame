@@ -1114,7 +1114,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474376bcffadc2c4fab89034d09bbe93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inAirtimer: 0
+  leapingVelocity: 3
+  fallingVelocity: 33
+  rayCastHightOffSet: 0.5
+  maxDistance: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
   isSprinting: 0
+  isGrounded: 1
   walkingSpeed: 1.5
   runningSpeed: 5
   sprintingSpeed: 7
@@ -1131,6 +1140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccb82b5accb8f1049af8add2dd2b3a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInteracting: 0
 --- !u!114 &1245163559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1360,11 +1370,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3431853855139040499, guid: 4cd08e9e0193ca349beeabe0f1af6432, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -10.34
       objectReference: {fileID: 0}
     - target: {fileID: 3431853855139040499, guid: 4cd08e9e0193ca349beeabe0f1af6432, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 5.08
       objectReference: {fileID: 0}
     - target: {fileID: 3431853855139040499, guid: 4cd08e9e0193ca349beeabe0f1af6432, type: 3}
       propertyPath: m_LocalPosition.z
