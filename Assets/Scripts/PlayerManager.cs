@@ -34,6 +34,8 @@ public class PlayerManager : MonoBehaviour
         cameraManager.HandleAllCameraMovement();
 
         isInteracting = animator.GetBool("isInteracting");
+        playerLokomotion.isJumping = animator.GetBool("isJumping");
+        animator.SetBool("isGrounded", playerLokomotion.isGrounded);
 
     }
 }

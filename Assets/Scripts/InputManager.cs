@@ -19,7 +19,7 @@ public class InputManager : MonoBehaviour
     public float horInput;
 
     public bool sprintInput;
-    //public bool jumpInput;
+    public bool jumpInput;
 
     private void Awake()
     {
@@ -38,7 +38,7 @@ public class InputManager : MonoBehaviour
 
             playerControls.PlayerActions.Sprinting.performed += i => sprintInput = true;
             playerControls.PlayerActions.Sprinting.canceled += i => sprintInput = false;
-            //playerControls.PlayerActions.Jumping.performed += i => jumpInput = true;
+            playerControls.PlayerActions.Jumping.performed += i => jumpInput = true;
         }
 
         playerControls.Enable();
@@ -53,7 +53,7 @@ public class InputManager : MonoBehaviour
     {
         HandleMovementInput();
         HandleSprintingInput();
-        //HandleJumpingInput();
+        HandleJumpingInput();
         //HandleActionInput
     }
 
@@ -81,12 +81,12 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    //private void HandleJumpingInput()
-    //{
-    //    if (jumpInput)
-    //    {
-    //        jumpInput = false;
-    //        playerLokomotion.HandleJumping();
-    //    }
-    //}
+    private void HandleJumpingInput()
+    {
+        if (jumpInput)
+        {
+            jumpInput = false;
+            playerLokomotion.HandleJumping();
+        }
+    }
 }
