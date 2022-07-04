@@ -10,7 +10,7 @@ public class PlayerLokomotion : MonoBehaviour
 
     Vector3 moveDirection;
     Transform cameraObject;
-    Rigidbody playerRigitbody;
+    public Rigidbody playerRigitbody;
 
     [Header("Falling")]
     public float inAirtimer;
@@ -165,5 +165,13 @@ public class PlayerLokomotion : MonoBehaviour
             playerVelocity.y = jumpingVelocity;
             playerRigitbody.velocity = playerVelocity;
         }
+    }
+
+    public void HandleDodge()
+    {
+        if (playerManager.isInteracting)
+            return;
+
+        animatorManager.PlayTargetAnimation("DodgeBackward", true, true);
     }
 }
