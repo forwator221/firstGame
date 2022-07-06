@@ -292,34 +292,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""PauseGame"",
-            ""id"": ""64d91e7b-0f35-4888-a911-a5d6a3857453"",
-            ""actions"": [
-                {
-                    ""name"": ""Pause"",
-                    ""type"": ""Button"",
-                    ""id"": ""7d42acff-cda1-4452-a493-3ed827e53076"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""a4fed5c3-7b0f-4bde-a338-6d0beb149259"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": []
@@ -333,9 +305,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerActions_Sprinting = m_PlayerActions.FindAction("Sprinting", throwIfNotFound: true);
         m_PlayerActions_Jumping = m_PlayerActions.FindAction("Jumping", throwIfNotFound: true);
         m_PlayerActions_DodgeBackward = m_PlayerActions.FindAction("DodgeBackward", throwIfNotFound: true);
-        // PauseGame
-        m_PauseGame = asset.FindActionMap("PauseGame", throwIfNotFound: true);
-        m_PauseGame_Pause = m_PauseGame.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -481,39 +450,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActionsActions @PlayerActions => new PlayerActionsActions(this);
-
-    // PauseGame
-    private readonly InputActionMap m_PauseGame;
-    private IPauseGameActions m_PauseGameActionsCallbackInterface;
-    private readonly InputAction m_PauseGame_Pause;
-    public struct PauseGameActions
-    {
-        private @PlayerControls m_Wrapper;
-        public PauseGameActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Pause => m_Wrapper.m_PauseGame_Pause;
-        public InputActionMap Get() { return m_Wrapper.m_PauseGame; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PauseGameActions set) { return set.Get(); }
-        public void SetCallbacks(IPauseGameActions instance)
-        {
-            if (m_Wrapper.m_PauseGameActionsCallbackInterface != null)
-            {
-                @Pause.started -= m_Wrapper.m_PauseGameActionsCallbackInterface.OnPause;
-                @Pause.performed -= m_Wrapper.m_PauseGameActionsCallbackInterface.OnPause;
-                @Pause.canceled -= m_Wrapper.m_PauseGameActionsCallbackInterface.OnPause;
-            }
-            m_Wrapper.m_PauseGameActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Pause.started += instance.OnPause;
-                @Pause.performed += instance.OnPause;
-                @Pause.canceled += instance.OnPause;
-            }
-        }
-    }
-    public PauseGameActions @PauseGame => new PauseGameActions(this);
     public interface IPlayerMovementActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -524,9 +460,5 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnSprinting(InputAction.CallbackContext context);
         void OnJumping(InputAction.CallbackContext context);
         void OnDodgeBackward(InputAction.CallbackContext context);
-    }
-    public interface IPauseGameActions
-    {
-        void OnPause(InputAction.CallbackContext context);
     }
 }

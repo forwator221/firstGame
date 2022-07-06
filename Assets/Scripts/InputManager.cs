@@ -44,8 +44,6 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.DodgeBackward.performed += i => dodgeInput = true;
             playerControls.PlayerActions.Jumping.performed += i => jumpInput = true;
 
-            playerControls.PauseGame.Pause.performed += i => isPaused = true;
-            playerControls.PauseGame.Pause.canceled += i => isPaused = false;
         }
 
         playerControls.Enable();

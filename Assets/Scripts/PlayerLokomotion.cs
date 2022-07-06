@@ -31,9 +31,9 @@ public class PlayerLokomotion : MonoBehaviour
     public float sprintingSpeed = 7;
     public float rotationSpeed = 15;
 
-    [Header("Jump Speeds")]
-    public float jumpHeight = 3;
-    public float gravityIntensity = -15;
+    [Header("Jump Stats")]
+    public float jumpOnDodge = 3;
+    public float jumpForse = 300f;
 
     private void Awake()
     {
@@ -57,6 +57,7 @@ public class PlayerLokomotion : MonoBehaviour
     {
         if (isJumping)
             return;
+
         moveDirection = cameraObject.forward * inputManager.vertInput;
         moveDirection = moveDirection + cameraObject.right * inputManager.horInput;
         moveDirection.Normalize();
@@ -77,9 +78,9 @@ public class PlayerLokomotion : MonoBehaviour
                 moveDirection = moveDirection * walkingSpeed;
             }
         }
-
         Vector3 movementVelocity = moveDirection;
         playerRigitbody.velocity = movementVelocity;
+
     }
 
     private void HandleRotation()
@@ -160,10 +161,11 @@ public class PlayerLokomotion : MonoBehaviour
             animatorManager.animator.SetBool("isJumping", true);
             animatorManager.PlayTargetAnimation("Jump",false);
 
-            float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
-            Vector3 playerVelocity = moveDirection;
-            playerVelocity.y = jumpingVelocity;
-            playerRigitbody.velocity = playerVelocity;
+            //float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
+            //Vector3 playerVelocity = moveDirection;
+            //playerVelocity.y = jumpingVelocity;
+            //playerRigitbody.velocity = playerVelocity;
+            playerRigitbody.AddForce(Vector3.up * jumpForse);
         }
     }
 

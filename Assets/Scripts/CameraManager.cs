@@ -18,8 +18,8 @@ public class CameraManager : MonoBehaviour
     public float minimumCollisionOffSet = 0.2f;
     public float cameraCollisionRadius = 0.2f; // Радиус столкновения камеры
     public float cameraFollowSpeed = 0.2f; // Скорость следования камеры
-    public float cameraLookSpeed = 2; // Скорость поворота камеры по оси Х
-    public float cameraPivotSpeed = 2; // Скорость поворота камеры по оси У
+    public float cameraLookSpeed = 5; // Скорость поворота камеры по оси Х
+    public float cameraPivotSpeed = 5; // Скорость поворота камеры по оси У
 
     public float lookAnge;  // Движение камеры вверх и вниз
     public float pivotAngle;    // Движение камеры влево и вправо
