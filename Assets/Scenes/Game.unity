@@ -2017,8 +2017,8 @@ MonoBehaviour:
   inAirtimer: 0
   leapingVelocity: 3
   fallingVelocity: 33
-  rayCastHightOffSet: 1
-  maxDistance: 0.5
+  rayCastHightOffSet: 0.5
+  maxDistance: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
@@ -2089,9 +2089,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.25
-  m_Height: 1.6616251
+  m_Height: 1.6588771
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8241874, z: 0}
+  m_Center: {x: 0, y: 0.8255614, z: 0}
 --- !u!1 &1284194577
 GameObject:
   m_ObjectHideFlags: 0

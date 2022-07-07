@@ -17,7 +17,7 @@ public class PlayerLokomotion : MonoBehaviour
     public float leapingVelocity;
     public float fallingVelocity;
     public float rayCastHightOffSet = 0.5f;
-    public float maxDistance = 0.2f;
+    public float maxDistance = 1;
     public LayerMask groundLayer;
 
     [Header("Movement Flags")]
@@ -124,14 +124,11 @@ public class PlayerLokomotion : MonoBehaviour
             playerRigitbody.AddForce(-Vector3.up * fallingVelocity * inAirtimer);
         }
 
-        if (Physics.SphereCast(rayCastOrigin, 0.1f, -Vector3.up, out hit, maxDistance, groundLayer))
+        if (Physics.SphereCast(rayCastOrigin, 0.2f, -Vector3.up, out hit, maxDistance, groundLayer))
         {
-            //Debug.DrawRay(rayCastOrigin, Vector3.down, Color.yellow);
-            //Debug.Log("Did hit");
-            if (!isGrounded && playerManager.isInteracting)
+            if (!isGrounded && !playerManager.isInteracting)
             {
                 animatorManager.PlayTargetAnimation("Land", true);
-                playerManager.isInteracting = false;
             }
 
             Vector3 rayCastHitPoint = hit.point;
@@ -142,7 +139,6 @@ public class PlayerLokomotion : MonoBehaviour
         else
         {
             isGrounded = false;
-            //Debug.Log("Not hit");
         }
 
         if (isGrounded && !isJumping)
