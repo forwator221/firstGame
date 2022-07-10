@@ -5,6 +5,8 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     PlayerControls playerControls;
+    PlayerAttacker playerAttacker;
+    PlayerInventory playerInventory;
     PlayerLokomotion playerLokomotion;
     AnimatorManager animatorManager;
 
@@ -22,12 +24,17 @@ public class InputManager : MonoBehaviour
     public bool dodgeInput;
     public bool jumpInput;
 
+    public bool lightAttackInput;
+    public bool comboLightAttackInput;
+
     public bool isPaused;
 
     private void Awake()
     {
         animatorManager = GetComponent<AnimatorManager>();
         playerLokomotion = GetComponent<PlayerLokomotion>();
+        playerAttacker = GetComponent<PlayerAttacker>();
+        playerInventory = GetComponent<PlayerInventory>();
     }
 
     private void OnEnable()
@@ -60,6 +67,7 @@ public class InputManager : MonoBehaviour
         HandleSprintingInput();
         HandleJumpingInput();
         HandleDodgeInput();
+        HandleAttackInput();
         //HandleActionInput
     }
 
@@ -102,6 +110,21 @@ public class InputManager : MonoBehaviour
         {
             dodgeInput = false;
             playerLokomotion.HandleDodge();
+        }
+    }
+
+    private void HandleAttackInput()
+    {
+        playerControls.PlayerActions.LightAttack.performed += i => lightAttackInput = true;
+        playerControls.PlayerActions.ComboLightAttack.performed += i => comboLightAttackInput = true;
+
+        if (lightAttackInput)
+        {
+            playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+        }
+        if (comboLightAttackInput)
+        {
+            playerAttacker.HandleComboLightAttack(playerInventory.rightWeapon);
         }
     }
 }

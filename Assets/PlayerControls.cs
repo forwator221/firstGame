@@ -255,6 +255,24 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LightAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""c7dfca93-9bbd-4f3d-910f-efd6301614f6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ComboLightAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""356a9991-879e-463e-9846-449640dc73ca"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -290,6 +308,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""DodgeBackward"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""134cf2e1-3db2-4966-9e31-61bbf7bdf5b2"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LightAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4ad11c14-35af-408a-93a7-a2b4c2994e27"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ComboLightAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -305,6 +345,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerActions_Sprinting = m_PlayerActions.FindAction("Sprinting", throwIfNotFound: true);
         m_PlayerActions_Jumping = m_PlayerActions.FindAction("Jumping", throwIfNotFound: true);
         m_PlayerActions_DodgeBackward = m_PlayerActions.FindAction("DodgeBackward", throwIfNotFound: true);
+        m_PlayerActions_LightAttack = m_PlayerActions.FindAction("LightAttack", throwIfNotFound: true);
+        m_PlayerActions_ComboLightAttack = m_PlayerActions.FindAction("ComboLightAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -408,6 +450,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_Sprinting;
     private readonly InputAction m_PlayerActions_Jumping;
     private readonly InputAction m_PlayerActions_DodgeBackward;
+    private readonly InputAction m_PlayerActions_LightAttack;
+    private readonly InputAction m_PlayerActions_ComboLightAttack;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -415,6 +459,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Sprinting => m_Wrapper.m_PlayerActions_Sprinting;
         public InputAction @Jumping => m_Wrapper.m_PlayerActions_Jumping;
         public InputAction @DodgeBackward => m_Wrapper.m_PlayerActions_DodgeBackward;
+        public InputAction @LightAttack => m_Wrapper.m_PlayerActions_LightAttack;
+        public InputAction @ComboLightAttack => m_Wrapper.m_PlayerActions_ComboLightAttack;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -433,6 +479,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @DodgeBackward.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnDodgeBackward;
                 @DodgeBackward.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnDodgeBackward;
                 @DodgeBackward.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnDodgeBackward;
+                @LightAttack.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLightAttack;
+                @LightAttack.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLightAttack;
+                @LightAttack.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLightAttack;
+                @ComboLightAttack.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnComboLightAttack;
+                @ComboLightAttack.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnComboLightAttack;
+                @ComboLightAttack.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnComboLightAttack;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -446,6 +498,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @DodgeBackward.started += instance.OnDodgeBackward;
                 @DodgeBackward.performed += instance.OnDodgeBackward;
                 @DodgeBackward.canceled += instance.OnDodgeBackward;
+                @LightAttack.started += instance.OnLightAttack;
+                @LightAttack.performed += instance.OnLightAttack;
+                @LightAttack.canceled += instance.OnLightAttack;
+                @ComboLightAttack.started += instance.OnComboLightAttack;
+                @ComboLightAttack.performed += instance.OnComboLightAttack;
+                @ComboLightAttack.canceled += instance.OnComboLightAttack;
             }
         }
     }
@@ -460,5 +518,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnSprinting(InputAction.CallbackContext context);
         void OnJumping(InputAction.CallbackContext context);
         void OnDodgeBackward(InputAction.CallbackContext context);
+        void OnLightAttack(InputAction.CallbackContext context);
+        void OnComboLightAttack(InputAction.CallbackContext context);
     }
 }

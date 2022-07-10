@@ -16,3 +16,5 @@ MonoBehaviour:
   itemName: WatermelonSword
   modelPrefab: {fileID: 8384936262508141245, guid: cf202fc21aa293b4194a6f88c909c043, type: 3}
   isUnarmed: 0
+  OH_Light_Attack_1: LightAttack
+  OH_Combo_Light_Attack_1: LightComboAttack
