@@ -233,6 +233,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LightAttack",
+                    "type": "Button",
+                    "id": "c7dfca93-9bbd-4f3d-910f-efd6301614f6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ComboLightAttack",
+                    "type": "Button",
+                    "id": "356a9991-879e-463e-9846-449640dc73ca",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -266,6 +284,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "DodgeBackward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "134cf2e1-3db2-4966-9e31-61bbf7bdf5b2",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LightAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4ad11c14-35af-408a-93a7-a2b4c2994e27",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ComboLightAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
