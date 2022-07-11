@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 24cfda14d97ebb048b93d67438318e2d
+guid: 6aa142ca79a92574982bc6fe6dbde1ee
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Dead
+    second: One Hand Sword Combo
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -36,11 +36,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Dead
+      name: One Hand Sword Combo
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 0
-      lastFrame: 132
+      firstFrame: 80
+      lastFrame: 136
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
