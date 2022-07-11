@@ -24,6 +24,10 @@ public class InputManager : MonoBehaviour
     public bool sprintInput;
     public bool dodgeInput;
     public bool jumpInput;
+    public bool arrowUp;
+    public bool arrowDown;
+    public bool arrowRight;
+    public bool arrowLeft;
 
     public bool lightAttackInput;
     public bool comboLightAttackInput;
@@ -70,6 +74,7 @@ public class InputManager : MonoBehaviour
         HandleJumpingInput();
         HandleDodgeInput();
         HandleAttackInput();
+        HandleQuickSlotsInput();
         //HandleActionInput
     }
 
@@ -130,6 +135,20 @@ public class InputManager : MonoBehaviour
         if (comboLightAttackInput)
         {
             playerAttacker.HandleComboLightAttack(playerInventory.rightWeapon);
+        }
+    }
+
+    private void HandleQuickSlotsInput()
+    {
+        playerControls.QuckSlots.DPadRight.performed += i => arrowRight = true;
+        playerControls.QuckSlots.DPadLeft.performed += i => arrowLeft = true;
+        if (arrowRight)
+        {
+            playerInventory.ChangeWeaponInRightHand();
+        }
+        else if(arrowLeft)
+        {
+            playerInventory.ChangeWeaponInLeftHand();
         }
     }
 }

@@ -6,25 +6,25 @@ public class CameraManager : MonoBehaviour
 {
     InputManager inputManager;
 
-    public Transform targetTransform; // Объект за которым следует камера
-    public Transform cameraPivot;   // Объект который используется как пивот камеры 
-    public Transform cameraTransform; // Изменяет текущий объект с камерой на сцене
-    public LayerMask collisionLayers; // Слои с которыми камера будет сталкиваться
+    public Transform targetTransform; 
+    public Transform cameraPivot;   
+    public Transform cameraTransform; 
+    public LayerMask collisionLayers; 
     private float defaultPosition;
     private Vector3 cameraFollowVelosity = Vector3.zero;
     private Vector3 cameraVectorPosition;
 
-    public float cameraCollisionOffSet = 0.2f; // На сколько далеко будет отскакивать камера при столкновнеии с объектом
+    public float cameraCollisionOffSet = 0.2f; 
     public float minimumCollisionOffSet = 0.2f;
-    public float cameraCollisionRadius = 0.2f; // Радиус столкновения камеры
-    public float cameraFollowSpeed = 0.2f; // Скорость следования камеры
-    public float cameraLookSpeed = 5; // Скорость поворота камеры по оси Х
-    public float cameraPivotSpeed = 5; // Скорость поворота камеры по оси У
+    public float cameraCollisionRadius = 0.2f; 
+    public float cameraFollowSpeed = 0.2f; 
+    public float cameraLookSpeed = 5; 
+    public float cameraPivotSpeed = 5; 
 
-    public float lookAnge;  // Движение камеры вверх и вниз
-    public float pivotAngle;    // Движение камеры влево и вправо
-    public float minimumPivotAngle = -35; // Минимальный угол наклона камеры
-    public float maximumPivotAngle = 35;    // Максимальный угол наклона камеры
+    public float lookAnge;  
+    public float pivotAngle;    
+    public float minimumPivotAngle = -35; 
+    public float maximumPivotAngle = 35;    
 
     private void Awake()
     {

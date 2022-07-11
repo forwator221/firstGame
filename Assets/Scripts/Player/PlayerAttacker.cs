@@ -13,11 +13,11 @@ public class PlayerAttacker : MonoBehaviour
 
     public void HandleLightAttack(WeaponItem weapon)
     {
-        animatorManager.PlayTargetAnimation(weapon.OH_Light_Attack_1, true);
+        animatorManager.PlayTargetAnimation(weapon.OH_Light_Attack_01, true);
     }
 
     public void HandleComboLightAttack(WeaponItem weapon)
     {
-        animatorManager.PlayTargetAnimation(weapon.OH_Combo_Light_Attack_1, true);
+        animatorManager.PlayTargetAnimation(weapon.OH_Combo_Light_Attack_01, true);
     }
 }

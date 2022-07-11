@@ -34,6 +34,10 @@ public class PlayerManager : MonoBehaviour
     {
         inputManager.lightAttackInput = false;
         inputManager.comboLightAttackInput = false;
+        inputManager.arrowUp = false;
+        inputManager.arrowDown = false;
+        inputManager.arrowLeft = false;
+        inputManager.arrowRight = false;
 
         cameraManager.HandleAllCameraMovement();
 
