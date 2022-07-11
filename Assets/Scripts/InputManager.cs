@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour
     PlayerInventory playerInventory;
     PlayerLokomotion playerLokomotion;
     AnimatorManager animatorManager;
+    PlayerManager playerManager;
 
     public Vector2 movementInput;
     public Vector2 cameraInput;
@@ -32,6 +33,7 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         animatorManager = GetComponent<AnimatorManager>();
+        playerManager = GetComponent<PlayerManager>();
         playerLokomotion = GetComponent<PlayerLokomotion>();
         playerAttacker = GetComponent<PlayerAttacker>();
         playerInventory = GetComponent<PlayerInventory>();
@@ -120,6 +122,9 @@ public class InputManager : MonoBehaviour
 
         if (lightAttackInput)
         {
+            if (playerManager.isInteracting)
+                return;
+
             playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
         }
         if (comboLightAttackInput)
