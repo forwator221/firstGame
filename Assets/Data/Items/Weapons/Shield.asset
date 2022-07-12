@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d6b11dd86986b44aac5554fe6bf6513, type: 3}
-  m_Name: WMSword
+  m_Name: Shield
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: a678f783a4a91bf4c995002c3d6d0f44, type: 3}
-  itemName: WatermelonSword
-  modelPrefab: {fileID: 8384936262508141245, guid: cf202fc21aa293b4194a6f88c909c043, type: 3}
+  itemIcon: {fileID: 21300000, guid: 8fab6beaae27b884cb2d3206adb905ea, type: 3}
+  itemName: Shield
+  modelPrefab: {fileID: 8448686851789578244, guid: aeaf58ec391e248408f8cadb59a350b9, type: 3}
   isUnarmed: 0
-  Right_Hand_Idle: Right_Arm_Idle
-  Left_Hand_Idle: Left_Arm_Idle
-  OH_Light_Attack_01: LightAttack
-  OH_Combo_Light_Attack_01: LightComboAttack
+  Right_Hand_Idle: 
+  Left_Hand_Idle: 
+  OH_Light_Attack_01: 
+  OH_Combo_Light_Attack_01: 

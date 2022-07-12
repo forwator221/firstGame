@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour
     PlayerInventory playerInventory;
     PlayerLokomotion playerLokomotion;
     AnimatorManager animatorManager;
+    PlayerManager playerManager;
 
     public Vector2 movementInput;
     public Vector2 cameraInput;
@@ -23,6 +24,10 @@ public class InputManager : MonoBehaviour
     public bool sprintInput;
     public bool dodgeInput;
     public bool jumpInput;
+    public bool arrowUp;
+    public bool arrowDown;
+    public bool arrowRight;
+    public bool arrowLeft;
 
     public bool lightAttackInput;
     public bool comboLightAttackInput;
@@ -32,6 +37,7 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         animatorManager = GetComponent<AnimatorManager>();
+        playerManager = GetComponent<PlayerManager>();
         playerLokomotion = GetComponent<PlayerLokomotion>();
         playerAttacker = GetComponent<PlayerAttacker>();
         playerInventory = GetComponent<PlayerInventory>();
@@ -50,7 +56,6 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.Sprinting.canceled += i => sprintInput = false;
             playerControls.PlayerActions.DodgeBackward.performed += i => dodgeInput = true;
             playerControls.PlayerActions.Jumping.performed += i => jumpInput = true;
-
         }
 
         playerControls.Enable();
@@ -68,6 +73,7 @@ public class InputManager : MonoBehaviour
         HandleJumpingInput();
         HandleDodgeInput();
         HandleAttackInput();
+        HandleQuickSlotsInput();
         //HandleActionInput
     }
 
@@ -120,11 +126,28 @@ public class InputManager : MonoBehaviour
 
         if (lightAttackInput)
         {
+            if (playerManager.isInteracting)
+                return;
+
             playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
         }
         if (comboLightAttackInput)
         {
             playerAttacker.HandleComboLightAttack(playerInventory.rightWeapon);
+        }
+    }
+
+    private void HandleQuickSlotsInput()
+    {
+        playerControls.QuckSlots.DPadRight.performed += i => arrowRight = true;
+        playerControls.QuckSlots.DPadLeft.performed += i => arrowLeft = true;
+        if (arrowRight)
+        {
+            playerInventory.ChangeWeaponInRightHand();
+        }
+        else if(arrowLeft)
+        {
+            playerInventory.ChangeWeaponInLeftHand();
         }
     }
 }

@@ -8,6 +8,7 @@ public class PlayerStats : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
 
+    public GameObject deadScreen;
     public HealthBar healthBar;
 
     AnimatorManager animatorManager;
@@ -19,6 +20,7 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
+        deadScreen.SetActive(false);
         maxHealth = SetMaxHealthFromHealthLevel();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
@@ -42,6 +44,7 @@ public class PlayerStats : MonoBehaviour
         {
             currentHealth = 0;
             animatorManager.PlayTargetAnimation("Dead", true);
+            deadScreen.SetActive(true);
         }
     }
 }
