@@ -56,7 +56,6 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.Sprinting.canceled += i => sprintInput = false;
             playerControls.PlayerActions.DodgeBackward.performed += i => dodgeInput = true;
             playerControls.PlayerActions.Jumping.performed += i => jumpInput = true;
-
         }
 
         playerControls.Enable();

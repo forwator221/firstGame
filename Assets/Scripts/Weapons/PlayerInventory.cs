@@ -91,4 +91,5 @@ public class PlayerInventory : MonoBehaviour
             weaponSlotManager.LoadOnWeaponSlot(unarmedWeapon, true);
         }
     }
+
 }
