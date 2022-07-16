@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
     PlayerLokomotion playerLokomotion;
     AnimatorManager animatorManager;
     PlayerManager playerManager;
+    UIManager uiManager;
 
     public Vector2 movementInput;
     public Vector2 cameraInput;
@@ -29,11 +30,13 @@ public class InputManager : MonoBehaviour
     public bool arrowRight;
     public bool arrowLeft;
     public bool pickUpInput;
+    public bool inventoryInput;
 
     public bool lightAttackInput;
     public bool comboLightAttackInput;
 
     public bool isPaused;
+    public bool inInventory;
 
     private void Awake()
     {
@@ -42,6 +45,7 @@ public class InputManager : MonoBehaviour
         playerLokomotion = GetComponent<PlayerLokomotion>();
         playerAttacker = GetComponent<PlayerAttacker>();
         playerInventory = GetComponent<PlayerInventory>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     private void OnEnable()
@@ -76,6 +80,7 @@ public class InputManager : MonoBehaviour
         HandleAttackInput();
         HandleQuickSlotsInput();
         HandleInteractingButtonInput();
+        HandleInventoryInput();
         //HandleActionInput
     }
 
@@ -157,5 +162,29 @@ public class InputManager : MonoBehaviour
     {
         playerControls.PlayerActions.PickUp.performed += i => pickUpInput = true;
     }
+
+    private void HandleInventoryInput()
+    {
+        playerControls.PlayerActions.Inventory.performed += i => inventoryInput = true;
+
+        if (inventoryInput)
+        {
+            inInventory = !inInventory;
+
+            if (inInventory)
+            {
+                uiManager.OpenSelectedWindow();
+                uiManager.UpdateUI();
+                uiManager.hudWindow.SetActive(false);
+            }
+            else
+            {
+                uiManager.CloseSelectedWindow();
+                uiManager.CloseAllInventoryWindows();
+                uiManager.hudWindow.SetActive(true);
+            }
+        }
+    }
+
 
 }

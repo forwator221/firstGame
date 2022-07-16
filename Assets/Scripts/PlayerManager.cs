@@ -45,6 +45,7 @@ public class PlayerManager : MonoBehaviour
         inputManager.arrowLeft = false;
         inputManager.arrowRight = false;
         inputManager.pickUpInput = false;
+        inputManager.inventoryInput = false;
 
         cameraManager.HandleAllCameraMovement();
 
