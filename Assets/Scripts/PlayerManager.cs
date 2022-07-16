@@ -9,6 +9,10 @@ public class PlayerManager : MonoBehaviour
     CameraManager cameraManager;
     PlayerLokomotion playerLokomotion;
 
+    InteractableUI interactableUI;
+    public GameObject interactableUIGameObject;
+    public GameObject interactableItemGameObject;
+
     public bool isInteracting;
     public bool isUsingRootMotion;
 
@@ -18,6 +22,7 @@ public class PlayerManager : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         cameraManager = FindObjectOfType<CameraManager>();
         playerLokomotion = GetComponent<PlayerLokomotion>();
+        interactableUI = FindObjectOfType<InteractableUI>();
     }
 
     private void Update()
@@ -63,12 +68,26 @@ public class PlayerManager : MonoBehaviour
                 if (interactableObject != null)
                 {
                     string interactableText = interactableObject.interactableText;
+                    interactableUI.interactableText.text = interactableText;
+                    interactableUIGameObject.SetActive(true);
 
                     if (inputManager.pickUpInput)
                     {
                         hit.collider.GetComponent<Interactable>().Interact(this);
                     }
                 }
+            }
+        }
+        else
+        {
+            if (interactableUIGameObject != null)
+            {
+                interactableUIGameObject.SetActive(false);
+            }
+            
+            if (interactableItemGameObject != null && inputManager.pickUpInput)
+            {
+                interactableItemGameObject.SetActive(false);
             }
         }
     }
