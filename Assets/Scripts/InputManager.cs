@@ -28,6 +28,7 @@ public class InputManager : MonoBehaviour
     public bool arrowDown;
     public bool arrowRight;
     public bool arrowLeft;
+    public bool pickUpInput;
 
     public bool lightAttackInput;
     public bool comboLightAttackInput;
@@ -74,6 +75,7 @@ public class InputManager : MonoBehaviour
         HandleDodgeInput();
         HandleAttackInput();
         HandleQuickSlotsInput();
+        HandleInteractingButtonInput();
         //HandleActionInput
     }
 
@@ -150,4 +152,10 @@ public class InputManager : MonoBehaviour
             playerInventory.ChangeWeaponInLeftHand();
         }
     }
+
+    private void HandleInteractingButtonInput()
+    {
+        playerControls.PlayerActions.PickUp.performed += i => pickUpInput = true;
+    }
+
 }

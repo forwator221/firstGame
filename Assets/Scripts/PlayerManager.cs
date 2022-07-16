@@ -23,6 +23,7 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {
         inputManager.HandleAllInputs();
+        CheckForInteractableObject();
     }
 
     private void FixedUpdate()
@@ -38,6 +39,7 @@ public class PlayerManager : MonoBehaviour
         inputManager.arrowDown = false;
         inputManager.arrowLeft = false;
         inputManager.arrowRight = false;
+        inputManager.pickUpInput = false;
 
         cameraManager.HandleAllCameraMovement();
 
@@ -46,5 +48,28 @@ public class PlayerManager : MonoBehaviour
         playerLokomotion.isJumping = animator.GetBool("isJumping");
         animator.SetBool("isGrounded", playerLokomotion.isGrounded);
 
+    }
+
+    public void CheckForInteractableObject()
+    {
+        RaycastHit hit;
+
+        if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, cameraManager.ignoreLayers))
+        {
+            if(hit.collider.tag == "Interactable")
+            {
+                Interactable interactableObject = hit.collider.GetComponent<Interactable>();
+
+                if (interactableObject != null)
+                {
+                    string interactableText = interactableObject.interactableText;
+
+                    if (inputManager.pickUpInput)
+                    {
+                        hit.collider.GetComponent<Interactable>().Interact(this);
+                    }
+                }
+            }
+        }
     }
 }

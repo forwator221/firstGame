@@ -20,8 +20,8 @@ MonoBehaviour:
   Left_Hand_Idle: LeftArmEmpty
   Unarmed_Attack_L01: 
   Unarmed_Attack_R01: 
-  OH_Light_Attack_01: Unarmed_Attack_L01
-  OH_Combo_Light_Attack_01: Unarmed_Attack_R01
+  OH_Light_Attack_01: Unarmed_Attack_R01
+  OH_Combo_Light_Attack_01: Unarmed_Attack_L01
   baseStamina: 5
   lightAttackMultiplier: 1
   comboAttackMultiplier: 1
