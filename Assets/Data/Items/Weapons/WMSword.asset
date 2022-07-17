@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d6b11dd86986b44aac5554fe6bf6513, type: 3}
   m_Name: WMSword
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: a678f783a4a91bf4c995002c3d6d0f44, type: 3}
+  itemIcon: {fileID: 21300000, guid: aea726aafb3676541a79900d1bc4768d, type: 3}
   itemName: WatermelonSword
   modelPrefab: {fileID: 8384936262508141245, guid: cf202fc21aa293b4194a6f88c909c043, type: 3}
   isUnarmed: 0

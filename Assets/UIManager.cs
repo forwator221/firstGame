@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     public Transform weaponInventorySlotsParent;
     WeaponInventorySlot[] weaponInventorySlots;
 
+
     private void Start()
     {
         weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();

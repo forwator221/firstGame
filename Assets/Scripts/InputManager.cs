@@ -173,12 +173,14 @@ public class InputManager : MonoBehaviour
 
             if (inInventory)
             {
+                Time.timeScale = 0;
                 uiManager.OpenSelectedWindow();
                 uiManager.UpdateUI();
                 uiManager.hudWindow.SetActive(false);
             }
             else
             {
+                Time.timeScale = 1;
                 uiManager.CloseSelectedWindow();
                 uiManager.CloseAllInventoryWindows();
                 uiManager.hudWindow.SetActive(true);
