@@ -9,7 +9,8 @@ public class CameraManager : MonoBehaviour
     public Transform targetTransform; 
     public Transform cameraPivot;   
     public Transform cameraTransform; 
-    public LayerMask collisionLayers; 
+    public LayerMask collisionLayers;
+    public LayerMask ignoreLayers;
     private float defaultPosition;
     private Vector3 cameraFollowVelosity = Vector3.zero;
     private Vector3 cameraVectorPosition;
@@ -32,6 +33,7 @@ public class CameraManager : MonoBehaviour
         targetTransform = FindObjectOfType<PlayerManager>().transform;
         cameraTransform = Camera.main.transform;
         defaultPosition = cameraTransform.localPosition.z;
+        ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
     }
 
     public void HandleAllCameraMovement()
