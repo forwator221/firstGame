@@ -6,11 +6,11 @@ public class InputManager : MonoBehaviour
 {
     PlayerControls playerControls;
     PlayerAttacker playerAttacker;
-    PlayerInventory playerInventory;
+    //PlayerInventory playerInventory;
     PlayerLokomotion playerLokomotion;
     AnimatorManager animatorManager;
     PlayerManager playerManager;
-    UIManager uiManager;
+    //UIManager uiManager;
 
     public Vector2 movementInput;
     public Vector2 cameraInput;
@@ -44,8 +44,8 @@ public class InputManager : MonoBehaviour
         playerManager = GetComponent<PlayerManager>();
         playerLokomotion = GetComponent<PlayerLokomotion>();
         playerAttacker = GetComponent<PlayerAttacker>();
-        playerInventory = GetComponent<PlayerInventory>();
-        uiManager = FindObjectOfType<UIManager>();
+        //playerInventory = GetComponent<PlayerInventory>();
+        //uiManager = FindObjectOfType<UIManager>();
     }
 
     private void OnEnable()
@@ -77,10 +77,10 @@ public class InputManager : MonoBehaviour
         HandleSprintingInput();
         HandleJumpingInput();
         HandleDodgeInput();
-        HandleAttackInput();
-        HandleQuickSlotsInput();
+        //HandleAttackInput();
+        //HandleQuickSlotsInput();
         HandleInteractingButtonInput();
-        HandleInventoryInput();
+        //HandleInventoryInput();
         //HandleActionInput
     }
 
@@ -126,67 +126,67 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void HandleAttackInput()
-    {
-        playerControls.PlayerActions.LightAttack.performed += i => lightAttackInput = true;
-        playerControls.PlayerActions.ComboLightAttack.performed += i => comboLightAttackInput = true;
+    //private void HandleAttackInput()
+    //{
+    //    playerControls.PlayerActions.LightAttack.performed += i => lightAttackInput = true;
+    //    playerControls.PlayerActions.ComboLightAttack.performed += i => comboLightAttackInput = true;
 
-        if (lightAttackInput)
-        {
-            if (playerManager.isInteracting)
-                return;
+    //    if (lightAttackInput)
+    //    {
+    //        if (playerManager.isInteracting)
+    //            return;
 
-            playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
-        }
-        if (comboLightAttackInput)
-        {
-            playerAttacker.HandleComboLightAttack(playerInventory.rightWeapon);
-        }
-    }
+    //        playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+    //    }
+    //    if (comboLightAttackInput)
+    //    {
+    //        playerAttacker.HandleComboLightAttack(playerInventory.rightWeapon);
+    //    }
+    //}
 
-    private void HandleQuickSlotsInput()
-    {
-        playerControls.QuckSlots.DPadRight.performed += i => arrowRight = true;
-        playerControls.QuckSlots.DPadLeft.performed += i => arrowLeft = true;
-        if (arrowRight)
-        {
-            playerInventory.ChangeWeaponInRightHand();
-        }
-        else if(arrowLeft)
-        {
-            playerInventory.ChangeWeaponInLeftHand();
-        }
-    }
+    //private void HandleQuickSlotsInput()
+    //{
+    //    playerControls.QuckSlots.DPadRight.performed += i => arrowRight = true;
+    //    playerControls.QuckSlots.DPadLeft.performed += i => arrowLeft = true;
+    //    if (arrowRight)
+    //    {
+    //        playerInventory.ChangeWeaponInRightHand();
+    //    }
+    //    else if(arrowLeft)
+    //    {
+    //        playerInventory.ChangeWeaponInLeftHand();
+    //    }
+    //}
 
     private void HandleInteractingButtonInput()
     {
         playerControls.PlayerActions.PickUp.performed += i => pickUpInput = true;
     }
 
-    private void HandleInventoryInput()
-    {
-        playerControls.PlayerActions.Inventory.performed += i => inventoryInput = true;
+    //private void HandleInventoryInput()
+    //{
+    //    playerControls.PlayerActions.Inventory.performed += i => inventoryInput = true;
 
-        if (inventoryInput)
-        {
-            inInventory = !inInventory;
+    //    if (inventoryInput)
+    //    {
+    //        inInventory = !inInventory;
 
-            if (inInventory)
-            {
-                Time.timeScale = 0;
-                uiManager.OpenSelectedWindow();
-                uiManager.UpdateUI();
-                uiManager.hudWindow.SetActive(false);
-            }
-            else
-            {
-                Time.timeScale = 1;
-                uiManager.CloseSelectedWindow();
-                uiManager.CloseAllInventoryWindows();
-                uiManager.hudWindow.SetActive(true);
-            }
-        }
-    }
+    //        if (inInventory)
+    //        {
+    //            Time.timeScale = 0;
+    //            uiManager.OpenSelectedWindow();
+    //            uiManager.UpdateUI();
+    //            uiManager.hudWindow.SetActive(false);
+    //        }
+    //        else
+    //        {
+    //            Time.timeScale = 1;
+    //            uiManager.CloseSelectedWindow();
+    //            uiManager.CloseAllInventoryWindows();
+    //            uiManager.hudWindow.SetActive(true);
+    //        }
+    //    }
+    //}
 
 
 }

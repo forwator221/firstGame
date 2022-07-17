@@ -5,59 +5,21 @@ using UnityEngine;
 public class PlayerAttacker : MonoBehaviour
 {
     AnimatorManager animatorManager;
-    //PlayerInventory playerInventory;
-    WeaponSlotManager weaponSlotManager;
-
-    //private int lefthandIndex;
-    //private int rightHandIndex;
-
-    //private bool isUnarmed;
+    //WeaponSlotManager weaponSlotManager;
 
     private void Awake()
     {
         animatorManager = GetComponentInChildren<AnimatorManager>();
-        weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
-        //playerInventory = GetComponent<PlayerInventory>();
     }
-
-    //private void FixedUpdate()
+    //public void HandleLightAttack(WeaponItem weapon)
     //{
-    //    CheckIndex();
+    //    weaponSlotManager.attackingWeapon = weapon;
+    //    animatorManager.PlayTargetAnimation(weapon.OH_Light_Attack_01, true);
     //}
 
-    public void HandleLightAttack(WeaponItem weapon)
-    {
-        weaponSlotManager.attackingWeapon = weapon;
-        animatorManager.PlayTargetAnimation(weapon.OH_Light_Attack_01, true);
-        //if (isUnarmed)
-        //{          
-        //    animatorManager.PlayTargetAnimation(weapon.Unarmed_Attack_R01, true);
-        //}
-        //else
-        //{
-        //    animatorManager.PlayTargetAnimation(weapon.OH_Light_Attack_01, true);
-        //}
-    }
-
-    public void HandleComboLightAttack(WeaponItem weapon)
-    {
-        weaponSlotManager.attackingWeapon = weapon;
-        animatorManager.PlayTargetAnimation(weapon.OH_Combo_Light_Attack_01, true);
-    }
-
-    //private void CheckIndex()
+    //public void HandleComboLightAttack(WeaponItem weapon)
     //{
-    //    rightHandIndex = playerInventory.currentRightWeaponIndex;
-    //    lefthandIndex = playerInventory.currentLeftWeaponIndex;
-
-    //    if (rightHandIndex == -1 && lefthandIndex == -1)
-    //    {
-    //        isUnarmed = true;
-    //    }
-    //    else
-    //    {
-    //        isUnarmed = false;
-    //    }           
+    //    weaponSlotManager.attackingWeapon = weapon;
+    //    animatorManager.PlayTargetAnimation(weapon.OH_Combo_Light_Attack_01, true);
     //}
-
 }
