@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {
         inputManager.HandleAllInputs();
-        //CheckForInteractableObject();
+        CheckForInteractableObject();
     }
 
     private void FixedUpdate()
@@ -56,40 +56,40 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    //public void CheckForInteractableObject()
-    //{
-    //    RaycastHit hit;
+    public void CheckForInteractableObject()
+    {
+        RaycastHit hit;
 
-    //    if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, cameraManager.ignoreLayers))
-    //    {
-    //        if(hit.collider.tag == "Interactable")
-    //        {
-    //            Interactable interactableObject = hit.collider.GetComponent<Interactable>();
+        if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, cameraManager.ignoreLayers))
+        {
+            if (hit.collider.tag == "Interactable")
+            {
+                Interactable interactableObject = hit.collider.GetComponent<Interactable>();
 
-    //            if (interactableObject != null)
-    //            {
-    //                string interactableText = interactableObject.interactableText;
-    //                interactableUI.interactableText.text = interactableText;
-    //                interactableUIGameObject.SetActive(true);
+                if (interactableObject != null)
+                {
+                    string interactableText = interactableObject.interactableText;
+                    interactableUI.interactableText.text = interactableText;
+                    interactableUIGameObject.SetActive(true);
 
-    //                if (inputManager.pickUpInput)
-    //                {
-    //                    hit.collider.GetComponent<Interactable>().Interact(this);
-    //                }
-    //            }
-    //        }
-    //    }
-    //    else
-    //    {
-    //        if (interactableUIGameObject != null)
-    //        {
-    //            interactableUIGameObject.SetActive(false);
-    //        }
-            
-    //        if (interactableItemGameObject != null && inputManager.pickUpInput)
-    //        {
-    //            interactableItemGameObject.SetActive(false);
-    //        }
-    //    }
-    //}
+                    if (inputManager.pickUpInput)
+                    {
+                        hit.collider.GetComponent<ItemPickUp>().Interact(this);
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (interactableUIGameObject != null)
+            {
+                interactableUIGameObject.SetActive(false);
+            }
+
+            if (interactableItemGameObject != null && inputManager.pickUpInput)
+            {
+                interactableItemGameObject.SetActive(false);
+            }
+        }
+    }
 }

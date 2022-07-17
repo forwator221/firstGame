@@ -6,7 +6,7 @@ public class InputManager : MonoBehaviour
 {
     PlayerControls playerControls;
     PlayerAttacker playerAttacker;
-    //PlayerInventory playerInventory;
+    Inventory inventory;
     PlayerLokomotion playerLokomotion;
     AnimatorManager animatorManager;
     PlayerManager playerManager;
@@ -44,7 +44,7 @@ public class InputManager : MonoBehaviour
         playerManager = GetComponent<PlayerManager>();
         playerLokomotion = GetComponent<PlayerLokomotion>();
         playerAttacker = GetComponent<PlayerAttacker>();
-        //playerInventory = GetComponent<PlayerInventory>();
+        inventory = GetComponent<Inventory>();
         //uiManager = FindObjectOfType<UIManager>();
     }
 
@@ -80,7 +80,7 @@ public class InputManager : MonoBehaviour
         //HandleAttackInput();
         //HandleQuickSlotsInput();
         HandleInteractingButtonInput();
-        //HandleInventoryInput();
+        HandleInventoryInput();
         //HandleActionInput
     }
 
@@ -163,30 +163,30 @@ public class InputManager : MonoBehaviour
         playerControls.PlayerActions.PickUp.performed += i => pickUpInput = true;
     }
 
-    //private void HandleInventoryInput()
-    //{
-    //    playerControls.PlayerActions.Inventory.performed += i => inventoryInput = true;
+    private void HandleInventoryInput()
+    {
+        playerControls.PlayerActions.Inventory.performed += i => inventoryInput = true;
 
-    //    if (inventoryInput)
-    //    {
-    //        inInventory = !inInventory;
+        if (inventoryInput)
+        {
+            inInventory = !inInventory;
 
-    //        if (inInventory)
-    //        {
-    //            Time.timeScale = 0;
-    //            uiManager.OpenSelectedWindow();
-    //            uiManager.UpdateUI();
-    //            uiManager.hudWindow.SetActive(false);
-    //        }
-    //        else
-    //        {
-    //            Time.timeScale = 1;
-    //            uiManager.CloseSelectedWindow();
-    //            uiManager.CloseAllInventoryWindows();
-    //            uiManager.hudWindow.SetActive(true);
-    //        }
-    //    }
-    //}
+            if (inInventory)
+            {
+                Time.timeScale = 0;
+                //uiManager.OpenSelectedWindow();
+                //uiManager.UpdateUI();
+                //uiManager.hudWindow.SetActive(false);
+            }
+            else
+            {
+                Time.timeScale = 1;
+                //uiManager.CloseSelectedWindow();
+                //uiManager.CloseAllInventoryWindows();
+                //uiManager.hudWindow.SetActive(true);
+            }
+        }
+    }
 
 
 }
