@@ -7,10 +7,18 @@ using UnityEngine;
 public class EquipmentObject : ItemScriptableObject
 {
 
-    public EquipmentSlot armorSlot;
+    public EquipmentSlot equipmentSlot;
 
     public int damageModifier;
     public int armorModifier;
+
+    public override void Use()
+    {
+        base.Use();
+
+        EquipmentManager.instance.Equip(this);
+        RemoveFromInventory();
+    }
 
 }
 

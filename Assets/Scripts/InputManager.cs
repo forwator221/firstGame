@@ -31,6 +31,7 @@ public class InputManager : MonoBehaviour
     public bool arrowLeft;
     public bool pickUpInput;
     public bool inventoryInput;
+    public bool unequipAllItemsInput;
 
     public bool lightAttackInput;
     public bool comboLightAttackInput;
@@ -81,6 +82,7 @@ public class InputManager : MonoBehaviour
         //HandleQuickSlotsInput();
         HandleInteractingButtonInput();
         HandleInventoryInput();
+        HandleUnequipAllItemsInput();
         //HandleActionInput
     }
 
@@ -181,6 +183,16 @@ public class InputManager : MonoBehaviour
 
                 inventoryUI.CloseInventory();
             }
+        }
+    }
+
+    private void HandleUnequipAllItemsInput()
+    {
+        playerControls.PlayerActions.UnequipAllItems.performed += i => unequipAllItemsInput = true;
+
+        if(unequipAllItemsInput)
+        {
+            EquipmentManager.instance.UnequipAll();
         }
     }
 
