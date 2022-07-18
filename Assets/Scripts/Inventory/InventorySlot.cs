@@ -4,23 +4,39 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
-    public ScriptableObject item;
+    public Image icon;
+    public Button removeButton;
 
-    public GameObject itemIcon;
-    public Text itemAmount;
+    ItemScriptableObject item;
 
-    public int amount;
-
-    public bool isEmpty = true;
-
-    private void Start()
+    public void AddItem(ItemScriptableObject newItem)
     {
-        itemIcon = transform.GetChild(0).GetChild(0).gameObject;
-        itemAmount = transform.GetChild(0).GetChild(1).GetComponent<Text>();
+        item = newItem;
+
+        icon.sprite = item.icon;
+        icon.enabled = true;
+        removeButton.interactable = true;
     }
-    public void SetIcon(Sprite _icon)
+
+    public void ClearSlot()
     {
-        itemIcon.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-        itemIcon.GetComponent<Image>().sprite = _icon;
+        item = null;
+
+        icon.sprite = null;
+        icon.enabled = false;
+        removeButton.interactable = false;
+    }
+
+    public void OnRemoveButton()
+    {
+        Inventory.instance.Remove(item);
+    }
+
+    public void UseItem()
+    {
+        if (item != null)
+        {
+            item.Use();
+        }
     }
 }

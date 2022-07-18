@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
     PlayerLokomotion playerLokomotion;
     AnimatorManager animatorManager;
     PlayerManager playerManager;
-    //UIManager uiManager;
+    InventoryUI inventoryUI;
 
     public Vector2 movementInput;
     public Vector2 cameraInput;
@@ -45,7 +45,7 @@ public class InputManager : MonoBehaviour
         playerLokomotion = GetComponent<PlayerLokomotion>();
         playerAttacker = GetComponent<PlayerAttacker>();
         inventory = GetComponent<Inventory>();
-        //uiManager = FindObjectOfType<UIManager>();
+        inventoryUI = FindObjectOfType<InventoryUI>();
     }
 
     private void OnEnable()
@@ -173,17 +173,13 @@ public class InputManager : MonoBehaviour
 
             if (inInventory)
             {
-                Time.timeScale = 0;
-                //uiManager.OpenSelectedWindow();
-                //uiManager.UpdateUI();
-                //uiManager.hudWindow.SetActive(false);
+
+                inventoryUI.OpenInventory();
             }
             else
             {
-                Time.timeScale = 1;
-                //uiManager.CloseSelectedWindow();
-                //uiManager.CloseAllInventoryWindows();
-                //uiManager.hudWindow.SetActive(true);
+
+                inventoryUI.CloseInventory();
             }
         }
     }
