@@ -8,6 +8,7 @@ public class EquipmentObject : ItemScriptableObject
 {
 
     public EquipmentSlot equipmentSlot;
+    public MeshRenderer mesh;
 
     public int damageModifier;
     public int armorModifier;

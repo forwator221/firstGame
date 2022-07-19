@@ -167,6 +167,9 @@ MonoBehaviour:
   collisionLayers:
     serializedVersion: 2
     m_Bits: 65
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
   cameraCollisionOffSet: 0.2
   minimumCollisionOffSet: 0.2
   cameraCollisionRadius: 1
